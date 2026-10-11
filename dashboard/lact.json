@@ -1,0 +1,1856 @@
+{
+    "annotations": [
+        {
+            "kind": "AnnotationQuery",
+            "spec": {
+                "builtIn": true,
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "query": {
+                    "datasource": {
+                        "name": "-- Grafana --"
+                    },
+                    "group": "grafana",
+                    "kind": "DataQuery",
+                    "spec": {},
+                    "version": "v0"
+                }
+            }
+        }
+    ],
+    "cursorSync": "Crosshair",
+    "description": "LACT GPU monitoring dashboard for Prometheus/OTLP metrics. Uses Prometheus metric names with unit suffixes generated from OpenTelemetry (e.g. lact_gpu_power_usage_watts).",
+    "editable": true,
+    "elements": {
+        "panel-1": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_usage_percent",
+                                            "legendFormat": "{{instance}}",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 1,
+                "links": [],
+                "title": "GPU Utilization",
+                "vizConfig": {
+                    "group": "stat",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "thresholds"
+                                },
+                                "decimals": 1,
+                                "max": 100,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 80
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 95
+                                        }
+                                    ]
+                                },
+                                "unit": "percent"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "colorMode": "value",
+                            "graphMode": "area",
+                            "justifyMode": "auto",
+                            "orientation": "auto",
+                            "percentChangeColorMode": "standard",
+                            "reduceOptions": {
+                                "calcs": [
+                                    "lastNotNull"
+                                ],
+                                "fields": "",
+                                "values": false
+                            },
+                            "showPercentChange": false,
+                            "textMode": "auto",
+                            "wideLayout": true
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-10": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "group": "",
+                                        "kind": "DataQuery",
+                                        "spec": {},
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 10,
+                "links": [],
+                "title": "Fan Speed",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 80
+                                        }
+                                    ]
+                                }
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [],
+                                "displayMode": "list",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "single",
+                                "sort": "none"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-11": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_fan_percent_percent",
+                                            "legendFormat": "Fan",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 11,
+                "links": [],
+                "title": "Fan Speed %",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 1,
+                                "max": 100,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "percent"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-12": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_vram_used_bytes / 1073741824",
+                                            "legendFormat": "Used",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_vram_total_bytes / 1073741824",
+                                            "legendFormat": "Total",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 12,
+                "links": [],
+                "title": "VRAM Usage",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 2,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "gbytes"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-13": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_usage_percent",
+                                            "legendFormat": "GPU Usage",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_power_usage_watts",
+                                            "legendFormat": "Power",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_temperature_celsius",
+                                            "legendFormat": "Temperature",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_clockspeed_hertz / 1000000000",
+                                            "legendFormat": "Clock GHz",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_voltage_volts * 1000",
+                                            "legendFormat": "Voltage mV",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_fan_percent_percent",
+                                            "legendFormat": "Fan %",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_vram_used_bytes / 1073741824",
+                                            "legendFormat": "VRAM Used GiB",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": [
+                            {
+                                "group": "labelsToFields",
+                                "kind": "Transformation",
+                                "spec": {
+                                    "options": {
+                                        "mode": "columns"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "description": "",
+                "id": 13,
+                "links": [],
+                "title": "Current GPU Metrics",
+                "vizConfig": {
+                    "group": "table",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "custom": {
+                                    "align": "auto",
+                                    "cellOptions": {
+                                        "type": "auto"
+                                    },
+                                    "footer": {
+                                        "reducers": []
+                                    },
+                                    "inspect": false
+                                },
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                }
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "cellHeight": "sm",
+                            "enablePagination": false,
+                            "showHeader": true,
+                            "sortBy": [
+                                {
+                                    "desc": true,
+                                    "displayName": "Time"
+                                }
+                            ]
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-2": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_power_usage_watts",
+                                            "legendFormat": "{{instance}}",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 2,
+                "links": [],
+                "title": "Power",
+                "vizConfig": {
+                    "group": "stat",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "thresholds"
+                                },
+                                "decimals": 1,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 80
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 95
+                                        }
+                                    ]
+                                },
+                                "unit": "watt"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "colorMode": "value",
+                            "graphMode": "area",
+                            "justifyMode": "auto",
+                            "orientation": "auto",
+                            "percentChangeColorMode": "standard",
+                            "reduceOptions": {
+                                "calcs": [
+                                    "lastNotNull"
+                                ],
+                                "fields": "",
+                                "values": false
+                            },
+                            "showPercentChange": false,
+                            "textMode": "auto",
+                            "wideLayout": true
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-3": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_temperature_celsius",
+                                            "format": "table",
+                                            "legendFormat": "{{instance}}",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 3,
+                "links": [],
+                "title": "Temperature",
+                "vizConfig": {
+                    "group": "stat",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "fixedColor": "#ad46ff",
+                                    "mode": "thresholds"
+                                },
+                                "decimals": 1,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 80
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 95
+                                        }
+                                    ]
+                                },
+                                "unit": "celsius"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "colorMode": "value",
+                            "graphMode": "none",
+                            "justifyMode": "auto",
+                            "orientation": "auto",
+                            "percentChangeColorMode": "standard",
+                            "reduceOptions": {
+                                "calcs": [
+                                    "lastNotNull"
+                                ],
+                                "fields": "",
+                                "values": false
+                            },
+                            "showPercentChange": false,
+                            "textMode": "auto",
+                            "wideLayout": true
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-4": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_vram_used_bytes / lact_gpu_vram_total_bytes * 100",
+                                            "legendFormat": "{{instance}}",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 4,
+                "links": [],
+                "title": "VRAM Used",
+                "vizConfig": {
+                    "group": "stat",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "thresholds"
+                                },
+                                "decimals": 1,
+                                "max": 100,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 80
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 95
+                                        }
+                                    ]
+                                },
+                                "unit": "percent"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "colorMode": "value",
+                            "graphMode": "area",
+                            "justifyMode": "auto",
+                            "orientation": "auto",
+                            "percentChangeColorMode": "standard",
+                            "reduceOptions": {
+                                "calcs": [
+                                    "lastNotNull"
+                                ],
+                                "fields": "",
+                                "values": false
+                            },
+                            "showPercentChange": false,
+                            "textMode": "auto",
+                            "wideLayout": true
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-5": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_power_usage_watts",
+                                            "legendFormat": "Power",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            },
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": true,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_power_usage_cap_watts",
+                                            "legendFormat": "Cap",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 5,
+                "links": [],
+                "title": "Power Usage vs Power Cap",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 1,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "watt"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-6": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_usage_percent",
+                                            "legendFormat": "GPU Usage",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 6,
+                "links": [],
+                "title": "GPU Utilization",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 1,
+                                "max": 100,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "percent"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-7": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_temperature_celsius",
+                                            "legendFormat": "GPU",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 7,
+                "links": [],
+                "title": "Temperature",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 1,
+                                "max": 110,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "celsius"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-8": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_clockspeed_hertz / 1000000000",
+                                            "legendFormat": "GPU Clock",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 8,
+                "links": [],
+                "title": "Clock Speed",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 2,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "GHz"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        },
+        "panel-9": {
+            "kind": "Panel",
+            "spec": {
+                "data": {
+                    "kind": "QueryGroup",
+                    "spec": {
+                        "queries": [
+                            {
+                                "kind": "PanelQuery",
+                                "spec": {
+                                    "hidden": false,
+                                    "query": {
+                                        "datasource": {
+                                            "name": "af6e5a24fr7y8e"
+                                        },
+                                        "group": "prometheus",
+                                        "kind": "DataQuery",
+                                        "spec": {
+                                            "editorMode": "code",
+                                            "expr": "lact_gpu_voltage_volts * 1000",
+                                            "legendFormat": "GPU Voltage",
+                                            "range": true
+                                        },
+                                        "version": "v0"
+                                    },
+                                    "refId": "A"
+                                }
+                            }
+                        ],
+                        "queryOptions": {},
+                        "transformations": []
+                    }
+                },
+                "description": "",
+                "id": 9,
+                "links": [],
+                "title": "Voltage",
+                "vizConfig": {
+                    "group": "timeseries",
+                    "kind": "VizConfig",
+                    "spec": {
+                        "fieldConfig": {
+                            "defaults": {
+                                "color": {
+                                    "mode": "palette-classic"
+                                },
+                                "custom": {
+                                    "axisBorderShow": false,
+                                    "axisCenteredZero": false,
+                                    "axisColorMode": "text",
+                                    "axisLabel": "",
+                                    "axisPlacement": "auto",
+                                    "barAlignment": 0,
+                                    "barWidthFactor": 0.6,
+                                    "drawStyle": "line",
+                                    "fillOpacity": 0,
+                                    "gradientMode": "none",
+                                    "hideFrom": {
+                                        "legend": false,
+                                        "tooltip": false,
+                                        "viz": false
+                                    },
+                                    "insertNulls": false,
+                                    "lineInterpolation": "linear",
+                                    "lineWidth": 1,
+                                    "pointSize": 5,
+                                    "scaleDistribution": {
+                                        "type": "linear"
+                                    },
+                                    "showPoints": "auto",
+                                    "showValues": false,
+                                    "spanNulls": false,
+                                    "stacking": {
+                                        "group": "A",
+                                        "mode": "none"
+                                    },
+                                    "thresholdsStyle": {
+                                        "mode": "off"
+                                    }
+                                },
+                                "decimals": 0,
+                                "min": 0,
+                                "thresholds": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green",
+                                            "value": 0
+                                        }
+                                    ]
+                                },
+                                "unit": "mvolt"
+                            },
+                            "overrides": []
+                        },
+                        "options": {
+                            "annotations": {
+                                "clustering": -1,
+                                "multiLane": false
+                            },
+                            "legend": {
+                                "calcs": [
+                                    "lastNotNull",
+                                    "mean",
+                                    "max"
+                                ],
+                                "displayMode": "table",
+                                "enableFacetedFilter": false,
+                                "overflow": "ellipsis",
+                                "placement": "bottom",
+                                "showLegend": true
+                            },
+                            "tooltip": {
+                                "hideZeros": false,
+                                "mode": "multi",
+                                "sort": "desc"
+                            }
+                        }
+                    },
+                    "version": "13.1.0"
+                }
+            }
+        }
+    },
+    "layout": {
+        "kind": "GridLayout",
+        "spec": {
+            "items": [
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-1"
+                        },
+                        "height": 5,
+                        "width": 6,
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-2"
+                        },
+                        "height": 5,
+                        "width": 6,
+                        "x": 6,
+                        "y": 0
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-3"
+                        },
+                        "height": 5,
+                        "width": 6,
+                        "x": 12,
+                        "y": 0
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-4"
+                        },
+                        "height": 5,
+                        "width": 6,
+                        "x": 18,
+                        "y": 0
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-5"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 5
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-6"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 5
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-7"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 13
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-8"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 13
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-9"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 21
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-12"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 21
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-11"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 29
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-10"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 29
+                    }
+                },
+                {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                        "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-13"
+                        },
+                        "height": 7,
+                        "width": 24,
+                        "x": 0,
+                        "y": 37
+                    }
+                }
+            ]
+        }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [
+        "LACT",
+        "GPU",
+        "Prometheus",
+        "OpenTelemetry"
+    ],
+    "timeSettings": {
+        "autoRefresh": "10s",
+        "autoRefreshIntervals": [
+            "5s",
+            "10s",
+            "30s",
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+        ],
+        "fiscalYearStartMonth": 0,
+        "from": "now-1h",
+        "hideTimepicker": false,
+        "timezone": "browser",
+        "to": "now"
+    },
+    "title": "LACT Monitoring",
+    "variables": [
+        {
+            "kind": "DatasourceVariable",
+            "spec": {
+                "allowCustomValue": true,
+                "current": {
+                    "text": "prometheus",
+                    "value": "af6e5a24fr7y8e"
+                },
+                "hide": "dontHide",
+                "includeAll": false,
+                "label": "Datasource",
+                "multi": false,
+                "name": "DS_PROMETHEUS",
+                "options": [],
+                "pluginId": "prometheus",
+                "refresh": "onDashboardLoad",
+                "regex": "",
+                "skipUrlSync": false
+            }
+        }
+    ]
+}

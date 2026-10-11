@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpsGraf — Lightweight Prometheus Dashboards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/vendor/uPlot.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__left">
+      <button class="hamburger" type="button" aria-label="Toggle module menu" aria-expanded="true" aria-controls="module-menu">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </button>
+      <div class="topbar__brand">Ops<em>Graf</em></div>
+    </div>
+    <div class="topbar__right">
+      <div id="prom-status" class="chip chip--success">Prometheus: Ready</div>
+      <select id="time-range-select" class="select-ctrl select-ctrl--sm" title="Time Range">
+        <option value="300">Last 5m</option>
+        <option value="900" selected>Last 15m</option>
+        <option value="1800">Last 30m</option>
+        <option value="3600">Last 1h</option>
+        <option value="10800">Last 3h</option>
+        <option value="21600">Last 6h</option>
+        <option value="43200">Last 12h</option>
+        <option value="86400">Last 24h</option>
+      </select>
+      <select id="refresh-interval-select" class="select-ctrl select-ctrl--sm" title="Auto Refresh">
+        <option value="0">Refresh: Off</option>
+        <option value="5" selected>Refresh: 5s</option>
+        <option value="10">Refresh: 10s</option>
+        <option value="30">Refresh: 30s</option>
+        <option value="60">Refresh: 1m</option>
+      </select>
+      <button id="btn-refresh" class="btn btn--primary btn--sm" type="button" title="Refresh Now">
+        Refresh
+      </button>
+
+      <div id="admin-actions" style="display: flex; align-items: center; gap: 6px; margin-left: 8px;">
+      </div>
+    </div>
+  </header>
+
+  <div class="shell" data-menu="open">
+    <aside class="sidebar" id="module-menu">
+      <div class="sidebar__title">Dashboards</div>
+      <nav class="sidebar__nav" id="sidebar-nav" aria-label="Dashboards">
+      </nav>
+    </aside>
+
+    <main class="main">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="#/">OpsGraf</a>
+        <span class="breadcrumb__sep">/</span>
+        <span class="breadcrumb__current" id="crumb-dashboard">Dashboard</span>
+      </nav>
+
+      <div id="alert-banner" class="error" role="alert" style="display: none;">
+        <p class="error__title" id="alert-title">Alert</p>
+        <p class="error__copy" id="alert-copy">Message</p>
+      </div>
+
+      <div class="pageheader">
+        <div>
+          <h1 id="dashboard-title">Loading Dashboard...</h1>
+          <p class="pageheader__desc" id="dashboard-desc"></p>
+        </div>
+      </div>
+
+      <div id="var-toolbar" class="var-toolbar" style="display: none;">
+      </div>
+
+      <div id="dashboard-grid" class="dashboard-grid">
+      </div>
+
+      <div id="empty-state" class="card empty" style="display: none;">
+        <p class="empty__title">No Dashboard Selected</p>
+        <p class="empty__copy">Select a dashboard from sidebar to view live Prometheus graphs.</p>
+      </div>
+
+      <footer class="meta">
+        <div>OpsGraf v0.1.0 &bull; Ultra-lightweight Prometheus Engine</div>
+        <div id="meta-stats">Ready</div>
+      </footer>
+    </main>
+  </div>
+
+  <div id="uplot-tooltip" class="uplot-tooltip"></div>
+
+  <div id="modal-login" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+      <div class="modal__head">
+        <h3 class="modal__title">Admin Authentication</h3>
+        <button class="modal__close" type="button" data-close="modal-login">&times;</button>
+      </div>
+      <form id="form-login" class="form" style="margin: 0; display: flex; flex-direction: column; flex: 1;">
+        <div class="modal__body">
+          <div id="login-error" class="error" style="display: none; margin-bottom: 12px;">
+            <p class="error__title">Authentication Failed</p>
+            <p class="error__copy" id="login-error-msg">Invalid username or password</p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="login-username">Username <span class="req">*</span></label>
+            <input id="login-username" type="text" autocomplete="username" required placeholder="admin" autofocus>
+          </div>
+          <div class="field" style="margin-top: 12px;">
+            <label class="field__label" for="login-password">Password <span class="req">*</span></label>
+            <input id="login-password" type="password" autocomplete="current-password" required placeholder="••••••••">
+          </div>
+        </div>
+        <div class="modal__foot">
+          <button class="btn btn--sm" type="button" data-close="modal-login">Cancel</button>
+          <button id="btn-submit-login" class="btn btn--primary btn--sm" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-edit" class="modal-backdrop" style="display: none;">
+    <div class="modal modal--wide">
+      <div class="modal__head">
+        <div>
+          <h3 class="modal__title" id="edit-modal-title">Live Edit Dashboard JSON</h3>
+          <span style="font-size: 11px; color: var(--style-text-muted);">Changes will create an automatic timestamped backup for rollback.</span>
+        </div>
+        <button class="modal__close" type="button" data-close="modal-edit">&times;</button>
+      </div>
+      <div class="modal__body" style="padding: 12px; gap: 8px;">
+        <div id="edit-error" class="error" style="display: none; margin-bottom: 8px;">
+          <p class="error__title">Validation Error</p>
+          <p class="error__copy" id="edit-error-msg"></p>
+        </div>
+        <textarea id="edit-json-content" class="code-editor" spellcheck="false" placeholder="Loading JSON..."></textarea>
+      </div>
+      <div class="modal__foot" style="justify-content: space-between;">
+        <button id="btn-format-json" class="btn btn--sm" type="button">Format JSON</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn--sm" type="button" data-close="modal-edit">Cancel</button>
+          <button id="btn-save-dashboard" class="btn btn--primary btn--sm" type="button">Save & Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-backups" class="modal-backdrop" style="display: none;">
+    <div class="modal modal--wide">
+      <div class="modal__head">
+        <div>
+          <h3 class="modal__title">Version History & Rollback</h3>
+          <span style="font-size: 11px; color: var(--style-text-muted);" id="backups-subtitle">Select a past version to restore.</span>
+        </div>
+        <button class="modal__close" type="button" data-close="modal-backups">&times;</button>
+      </div>
+      <div class="modal__body">
+        <div id="backups-list-container" class="table-wrap">
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--sm" type="button" data-close="modal-backups">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/vendor/uPlot.iife.min.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script>
+    (function () {
+      var shell = document.querySelector(".shell");
+      var btn = document.querySelector(".hamburger");
+      if (!shell || !btn) { return; }
+      var mq = window.matchMedia("(min-width: 901px)");
+      function setState(open) {
+        shell.dataset.menu = open ? "open" : "closed";
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      function sync() { setState(mq.matches); }
+      btn.addEventListener("click", function () {
+        setState(shell.dataset.menu !== "open");
+      });
+      if (mq.addEventListener) { mq.addEventListener("change", sync); }
+      else { mq.addListener(sync); }
+      document.querySelectorAll(".nav-item").forEach(function (a) {
+        a.addEventListener("click", function () {
+          if (!mq.matches) { setState(false); }
+        });
+      });
+      sync();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+services:
+  opsgraf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: opsgraf:latest
+    container_name: opsgraf
+    restart: unless-stopped
+    ports:
+      - "${LISTEN_PORT:-8080}:8080"
+    env_file:
+      - .env
+    environment:
+      - LISTEN_PORT=${LISTEN_PORT:-8080}
+      - LISTEN_ADDRESS=${LISTEN_ADDRESS:-0.0.0.0}
+      - PROMETHEUS_ENDPOINT=${PROMETHEUS_ENDPOINT:-http://127.0.0.1:9090}
+      - TIMEZONE=${TIMEZONE:-Asia/Jakarta}
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - DASHBOARD_DIR=/app/dashboard
+    volumes:
+      - ./dashboard:/app/dashboard
