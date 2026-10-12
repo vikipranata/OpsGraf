@@ -7,8 +7,6 @@
 
 **OpsGraf** is an ultra-lightweight, high-performance alternative to Grafana built specifically for Prometheus metrics visualization. It features sub-second load times, an idle footprint of ~15 MB RAM, and zero database dependencies.
 
-The visual design system strictly follows the modern corporate light theme tokens from [vikipranata/echoheaders](https://raw.githubusercontent.com/vikipranata/echoheaders/refs/heads/main/apps/webui.go).
-
 ---
 
 ## Highlights
@@ -154,9 +152,3 @@ opsgraf/
 ├── CHANGELOG.md                 # Version release history
 └── README.md
 ```
-
----
-
-## License
-
-MIT
